@@ -1,0 +1,267 @@
+<div class="gallery_main layout_padding">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h1 class="about_taital"><strong><span style="color: #ffffff;">Se</span> Busca</strong></h1>
+        <p class="sed_text"> Para ver informacion de la busqueda haga click en cada una de las Fotos..
+        </p>
+        <button type="button" class="Edit" *ngIf="isloged()"
+ (click)="onOpenModal('add')" data-bs-toggle="modal" data-bs-target="#addbusquedaModal">
+ <i class="fa-solid fa-plus"></i>
+</button> 
+      </div>
+    </div>
+   
+    <div class="gallery_images">
+      <div class="row">
+
+       <div class="col-sm-6" *ngFor="let busqueda of busquedas">
+          <div class="gallery_blog">
+            <img src="{{busqueda.img}}" style="max-width: 100%; height: 300px; width: 100%;">
+            <div class="overlay">
+              <div class="text">
+                <p>Respode al nombre: {{busqueda.nombre}}</p><br>
+                <p>Se extravio en: {{busqueda.localidad}}</p><br>
+                <p>Comunicarse al: {{busqueda.telefono}}</p><br>
+              </div>
+            </div>
+          </div>
+
+          <div class="iconosEdicion" *ngIf="isloged()">
+            <button class="Edit" (click)="onOpenModal('edit',busqueda)"><i class="fa-solid fa-pen"></i> <!-- click edit -->
+            </button>
+            <button class="Edit"  (click)="onOpenModal('delete', busqueda)">
+              <i class="fa-solid fa-trash"></i> </button><!-- click borrar -->
+          </div>
+
+
+        </div>
+     </div>
+    </div>
+
+   
+    <!-- prueba fin -->
+  </div>
+</div>
+
+<!-- MODAL AGREGAR -->
+<div
+  class="modal fade"
+  id="addBusquedaModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="addBusquedaModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addBusquedaModalLabel">
+          Agregar Busqueda
+        </h5>
+      </div>
+      <div class="modal-body">
+        <form #addForm="ngForm" (ngSubmit)="onAddBusqueda(addForm)">
+          <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input
+              type="text"
+              ngModel
+              name="nombre"
+              class="form-control"
+              id="nombre"
+              placeholder="Nombre"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="localidad">Localidad de Mascota</label>
+            <input
+              type="text"
+              ngModel
+              name="localidad"
+              class="form-control"
+              id="localidad"
+              placeholder="localidad"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="telefono">Telefono a comunicarse</label>
+            <input
+              type="text"
+              ngModel
+              name="telefono"
+              class="form-control"
+              id="telefono"
+              placeholder="telefono"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="img">URL de la imagen</label>
+            <input
+              type="text"
+              ngModel
+              name="img"
+              class="form-control"
+              id="img"
+              placeholder="URL de la imagen"
+              required
+            />
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              id="add-Busqueda-form"
+              class="btn btn-danger"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              [disabled]="addForm.invalid"
+              type="submit"
+              class="btn btn-primary"
+            >
+              Guardar cambios
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL PARA EDITAR -->
+<div
+  class="modal fade"
+  id="editBusquedaModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="BusquedaEditModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updateBusquedaModalLabel">
+          Editar Busqueda {{ editBusqueda?.nombre }}
+        </h5>
+      </div>
+      <div class="modal-body">
+        <form #editForm="ngForm">
+          <div class="form-group">
+            <label for="nombre">Nombre Mascota</label>
+            <input
+              type="text"
+              ngModel="{{ editBusqueda?.nombre }}"
+              name="nombre"
+              class="form-control"
+              id="nombre1"
+              aria-describedby="emailHelp"
+              placeholder="Nombre"
+            />
+          </div>
+          <input
+            type="hidden"
+            ngModel="{{ editBusqueda?.id }}"
+            name="id"
+            class="form-control"
+            id="id1"
+            placeholder=""
+          />
+          <div class="form-group">
+            <label for="localidad">Localidad</label>
+            <input
+              type="text"
+              ngModel="{{ editBusqueda?.localidad }}"
+              name="localidad"
+              class="form-control"
+              id="localidad1"
+              placeholder="Localidad"
+            />
+          </div>
+          <div class="form-group">
+            <label for="telefono">Telefono</label>
+            <input
+              type="text"
+              ngModel="{{ editBusqueda?.telefono }}"
+              name="telefono"
+              class="form-control"
+              id="telefono1"
+              placeholder="telefono"
+            />
+          </div>
+          <div class="form-group">
+            <label for="img">URL de imagen</label>
+            <input
+              type="text"
+              ngModel="{{ editBusqueda?.img }}"
+              name="img"
+              class="form-control"
+              id="img1"
+              placeholder="URL de imagen"
+            />
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              id="2"
+              data-bs-dismiss="modal"
+              class="btn btn-danger"
+            >
+              Cerrar
+            </button>
+            <button
+              (click)="onUpdateBusqueda(editForm.value)"
+              data-bs-dismiss="modal"
+              class="btn btn-primary"
+            >
+              Guardar Cambios
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL PARA BORRAR -->
+<div
+  class="modal fade"
+  id="deleteBusquedaModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="deleteModelLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModelLabel">Borrar Busqueda</h5>
+      </div>
+      <div class="modal-body">
+        <p>
+          Estás seguro que quieres borrar
+          {{ deleteBusqueda?.nombre }}?
+        </p>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            No
+          </button>
+          <button
+            (click)="onDeleteBusqueda(deleteBusqueda!.id)"
+            class="btn btn-danger"
+            data-bs-dismiss="modal"
+          >
+            Si
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- sin busquedas -->

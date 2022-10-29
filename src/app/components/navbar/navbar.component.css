@@ -1,0 +1,28 @@
+.navbar1{
+    width: 100%;
+    background-color: rgb(34, 31, 31);
+    margin: 0px;
+    padding: 0px;
+}
+.menu1{
+    margin:0px;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    list-style: none;
+    justify-content: space-between;
+}
+.donar:hover{
+color: white ;
+}
+
+li{
+    color: white;
+}
+
+.fa-user{
+    color:white;
+}
+.logo1{
+    height: 2rem;
+}

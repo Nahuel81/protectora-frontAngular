@@ -1,0 +1,246 @@
+<div class="gallery_main layout_padding">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <h1 class="about_taital"><strong><span style="color: #ffffff;">En</span> Adopción</strong></h1>
+          <p class="sed_text"> Para adoptar alguna de las siguientes mascotas comuniquese en instagram con la protectora
+            correspondiente,
+            Tocando cada una de las Fotos encontrara la informacion necesaria..
+          </p>
+  
+          <button type="button" class="Edit" *ngIf="isloged()"
+          (click)="onOpenModal('add')" data-bs-toggle="modal" data-bs-target="#addAdopcionModal">
+          <i class="fa-solid fa-plus"></i>
+         </button> 
+
+        </div>
+      </div>
+        
+      <div class="gallery_images">
+        <div class="row">
+          <div class="col-sm-6" *ngFor="let adopcion of adopciones">
+            <div class="gallery_blog">
+              <img src="{{adopcion.imgAdop}}" style="max-width: 100%; height: 300px; width: 100%;">
+              <div class="overlay">
+                <div class="text">
+                  <p>{{adopcion.nombreAdop}}</p><br>
+                  <a href="{{adopcion.instagramAdop}}" target="_blank">
+                    Haga click para ir al Instagram</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="iconosEdicion" *ngIf="isloged()">
+              <button class="Edit" (click)="onOpenModal('edit',adopcion)"><i class="fa-solid fa-pen"></i> <!-- click edit -->
+              </button>
+              <button class="Edit"  (click)="onOpenModal('delete', adopcion)">
+                <i class="fa-solid fa-trash"></i> </button><!-- click borrar -->
+            </div>
+
+          </div>
+         </div>
+      </div>
+  
+     
+      <!-- prueba fin -->
+    </div>
+  </div>
+
+  <!-- MODAL AGREGAR -->
+<div
+class="modal fade"
+id="addAdopcionModal"
+tabindex="-1"
+role="dialog"
+aria-labelledby="addAdopcionModalLabel"
+aria-hidden="true"
+>
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="addAdopcionModalLabel">
+        Agregar Adopcion
+      </h5>
+    </div>
+    <div class="modal-body">
+      <form #addForm="ngForm" (ngSubmit)="onAddAdopcion(addForm)">
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input
+            type="text"
+            ngModel
+            name="nombreAdop"
+            class="form-control"
+            id="nombreAdop"
+            placeholder="Nombre"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="instagram">Url de Instagram Protectora</label>
+          <input
+            type="text"
+            ngModel
+            name="instagramAdop"
+            class="form-control"
+            id="instagramAdop"
+            placeholder="ingrese url de instagram"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="img">URL de la imagen</label>
+          <input
+            type="text"
+            ngModel
+            name="imgAdop"
+            class="form-control"
+            id="imgAdop"
+            placeholder="URL de la imagen"
+            required
+          />
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            id="add-Adopcion-form"
+            class="btn btn-danger"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button
+            [disabled]="addForm.invalid"
+            type="submit"
+            class="btn btn-primary"
+          >
+            Guardar cambios
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- MODAL PARA EDITAR -->
+<div
+class="modal fade"
+id="editAdopcionModal"
+tabindex="-1"
+role="dialog"
+aria-labelledby="AdopcionEditModalLabel"
+aria-hidden="true"
+>
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="updateAdopcionModalLabel">
+        Editar Adopcion {{ editAdopcion?.nombreAdop }}
+      </h5>
+    </div>
+    <div class="modal-body">
+      <form #editForm="ngForm">
+        <div class="form-group">
+          <label for="nombreAdop">Nombre Mascota</label>
+          <input
+            type="text"
+            ngModel="{{ editAdopcion?.nombreAdop }}"
+            name="nombreAdop"
+            class="form-control"
+            id="nombreAdop1"
+            aria-describedby="emailHelp"
+            placeholder="Nombre"
+          />
+        </div>
+        <input
+          type="hidden"
+          ngModel="{{ editAdopcion?.id }}"
+          name="id"
+          class="form-control"
+          id="id"
+          placeholder=""
+        />
+        <div class="form-group">
+          <label for="instagramAdop">Url de instagram</label>
+          <input
+            type="text"
+            ngModel="{{ editAdopcion?.instagramAdop }}"
+            name="instagramAdop"
+            class="form-control"
+            id="instagramAdop1"
+            placeholder="instagram"
+          />
+        </div>
+        <div class="form-group">
+          <label for="imgAdop">URL de imagen</label>
+          <input
+            type="text"
+            ngModel="{{ editAdopcion?.imgAdop }}"
+            name="imgAdop"
+            class="form-control"
+            id="imgAdop1"
+            placeholder="URL de imagen"
+          />
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            id="1"
+            data-bs-dismiss="modal"
+            class="btn btn-danger"
+          >
+            Cerrar
+          </button>
+          <button
+            (click)="onUpdateAdopcion(editForm.value)"
+            data-bs-dismiss="modal"
+            class="btn btn-primary"
+          >
+            Guardar Cambios
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- MODAL PARA BORRAR -->
+<div
+class="modal fade"
+id="deleteAdopcionModal"
+tabindex="-1"
+role="dialog"
+aria-labelledby="deleteModelLabel"
+aria-hidden="true"
+>
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="deleteModelLabel">Borrar Busqueda</h5>
+    </div>
+    <div class="modal-body">
+      <p>
+        Estás seguro que quieres borrar
+        {{ deleteAdopcion?.nombreAdop }}?
+      </p>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          No
+        </button>
+        <button
+          (click)="onDeleteAdopcion(deleteAdopcion!.id)"
+          class="btn btn-danger"
+          data-bs-dismiss="modal"
+        >
+          Si
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- sin busquedas -->

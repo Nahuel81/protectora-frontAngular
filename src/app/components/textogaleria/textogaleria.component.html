@@ -1,0 +1,184 @@
+
+<div class="card mb-0 orange" style="max-width: 100%;">
+<div class="row g-0"> 
+      <div class="col-md-4">
+          <button type="button" class="Edit"
+ (click)="onOpenModal('add')" data-bs-toggle="modal" data-bs-target="#addQuienessomosModal">
+ <i class="fa-solid fa-plus"></i>
+</button>
+        <img src="../../../assets/gallery-img2.jpg" class="img-fluid" alt="imageNotFound">
+      </div>
+      <div class="col-md-8"  *ngFor="let item of texto">
+        <div class="card-body">
+          <h5 class="card-title">¿Quienes Somos?</h5>
+          <p class="card-text">
+           <span>{{item.descripcion}}</span>
+          </p>
+          <p class="card-text"><small class="text-muted">publicado por protectora garras y patas</small></p>
+          <div class="iconosEdicion" >
+            <button class="Edit" (click)="onOpenModal('edit', item)"><i class="fa-solid fa-pen"></i> <!-- click edit -->
+            </button>
+            <button class="Edit"  (click)="onOpenModal('delete', item)">
+              <i class="fa-solid fa-trash"></i> </button>
+            <!-- click borrar -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- modales -->
+
+  <div
+  class="modal fade"
+  id="addQuienesSomosModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="addQuienesSomosModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addQuienesSomosModalLabel">
+          Agregar
+        </h5>
+      </div>
+      <div class="modal-body">
+        <form #addForm="ngForm" (ngSubmit)="onAddQuienesSomos(addForm)">
+          <div class="form-group">
+            <label for="descripcion">descripcion</label>
+            <input
+              type="text"
+              ngModel
+              name="descripcion"
+              class="form-control"
+              id="descripcion2"
+              placeholder="Descripcion"
+              required
+            />
+          </div>
+         
+          <div class="modal-footer">
+            <button
+              type="button"
+              id="add-somos-form"
+              class="btn btn-danger"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              [disabled]="addForm.invalid"
+              type="submit"
+              class="btn btn-primary"
+            >
+              Guardar cambios
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL PARA EDITAR -->
+<div
+class="modal fade"
+id="editQuienesSomosModal"
+tabindex="-1"
+role="dialog"
+aria-labelledby="QuienesSomosEditModalLabel"
+aria-hidden="true"
+>
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="updateQuienesSomosModalLabel">
+        Editar {{ editQuienesSomos?.id}}
+      </h5>
+    </div>
+    <div class="modal-body">
+      <form #editForm="ngForm">
+        <div class="form-group">
+          <label for="descripcion">Descripcion</label>
+          <input
+            type="text"
+            ngModel="{{ editQuienesSomos?.descripcion }}"
+            name="descripcion"
+            class="form-control"
+            id="descripcion1"
+            aria-describedby="emailHelp"
+            placeholder="descripcion"
+          />
+        </div>
+        <input
+          type="hidden"
+          ngModel="{{ editQuienesSomos?.id }}"
+          name="id1"
+          class="form-control"
+          id="id1"
+          placeholder=""
+        />
+       
+        <div class="modal-footer">
+          <button
+            type="button"
+            id="btn1"
+            data-bs-dismiss="modal"
+            class="btn btn-danger"
+          >
+            Cerrar
+          </button>
+          <button
+            (click)="onUpdateQuienesSomos(editForm.value)"
+            data-bs-dismiss="modal"
+            class="btn btn-primary"
+          >
+            Guardar Cambios
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- MODAL PARA BORRAR -->
+<div
+  class="modal fade"
+  id="deleteQuienesSomosModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="deleteModelLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteQuienesSomosLabel">Borrar</h5>
+      </div>
+      <div class="modal-body">
+        <p>
+          Estás seguro que quieres borrar
+          {{ deleteQuienesSomos?.id}}
+        </p>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            No
+          </button>
+          <button
+            (click)="onDeleteQuienesSomos(deleteQuienesSomos!.id)"
+            class="btn btn-danger"
+            data-bs-dismiss="modal"
+          >
+            Si
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- sin busquedas -->

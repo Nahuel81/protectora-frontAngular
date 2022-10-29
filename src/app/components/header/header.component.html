@@ -1,0 +1,65 @@
+<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="../../../assets/bannerCanva.jpg"  class="d-block w-100">
+        <div class="carousel-caption">
+          <h3 class="letrasBlancas" >ADOPTA UN AMIGO</h3>
+          <p class="p">“En un mal momento cuando necesites una mano recibe una pata”</p>
+        </div>
+      </div>
+      <div class="carousel-item" *ngFor="let item of galerias">
+        <img src="{{item.imgGaleria}}" class="d-block w-100" alt="imagen no encontrada">
+        <div class="carousel-caption d-block d-md-block">
+          <p class="letrasBlancas">{{item.descripcionGaleria}}</p>
+        </div>
+        <!-- botones -->
+
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+ 
+
+  <!-- ../../../assets/Protectora Garras y Patas.mp4 -->
+
+
+
+
+<!-- <div class="header_section">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4">
+                <div><a href="index.html"><img src=""></a></div>
+            </div>
+            <div class="col-md-8">                    
+                </div>
+        </div>
+    </div>
+    <div class="banner_main">
+        <div class="container">
+            <div class="ram">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h1 class="taital">Adopta un Amigo</h1>
+                        <p class="consectetur_text">“En un mal momento cuando necesites una mano recibe una pata”.<br>
+                         <button type="button" class="btn btn-primary botonD"><a class="donar2" href="https://ceneka.net/Protectoragarrasypatas" target="_blank">Donar</a></button>
+                        </p>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->

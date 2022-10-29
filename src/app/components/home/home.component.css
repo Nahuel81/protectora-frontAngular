@@ -1,0 +1,23 @@
+.header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+   width: 100%;
+   margin: 0px;
+   background-image: url(../../../assets/background.png);
+   background-size: cover;
+}
+
+.item-1{
+    display: flex;
+    flex-basis: 400px;
+}
+.item-1 button{
+    flex-basis:400px;
+    height: 50px;
+    background-color: aqua;
+}
+.item-1 button:hover{
+    background-color: aliceblue;
+}

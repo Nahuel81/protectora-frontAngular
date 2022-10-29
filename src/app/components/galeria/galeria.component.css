@@ -1,0 +1,10 @@
+.orange{
+background-color: #f7941d;
+}
+.card{
+    border-radius: 0px !important;
+}
+.card-title{
+    font-size: 2.5rem;
+    font-family: fantasy;
+}

@@ -1,0 +1,26 @@
+.active{
+    margin: 0px;
+    padding: 0px;
+}
+.letrasBlancas{
+    color: white;
+}
+
+span.carousel-control-next-icon{
+    color: black;
+}
+
+
+.p{
+   font-size: 1.2rem;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.donar2{
+    color:white;
+}
+.botonD{
+    width: 100%;
+}
+.botonD:hover{
+    background-color: orange;
+}
